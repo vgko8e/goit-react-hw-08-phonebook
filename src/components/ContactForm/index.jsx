@@ -3,14 +3,10 @@ import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import styles from './ContactForm.module.css';
 
-const INITIAL_STATE = {
-  name: '',
-  number: '',
-};
-
 export class ContactForm extends Component {
   state = {
-    ...INITIAL_STATE,
+    name: '',
+    number: '',
   };
   nameInputId = nanoid();
   numberInputId = nanoid();
@@ -30,7 +26,7 @@ export class ContactForm extends Component {
     this.resetForm();
   };
   resetForm = () => {
-    this.setState({ ...INITIAL_STATE });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
