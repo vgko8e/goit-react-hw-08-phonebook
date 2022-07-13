@@ -56,6 +56,21 @@ export class App extends Component {
     );
   };
 
+  componentDidMount() {
+    const storageContacts = localStorage.getItem('contact');
+    const parsedContacts = JSON.parse(storageContacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contact', JSON.stringify(this.state.contacts));
+    }
+  }
+
   render() {
     const { filter } = this.state;
     const { addContact, deleteContact, changeInput } = this;
