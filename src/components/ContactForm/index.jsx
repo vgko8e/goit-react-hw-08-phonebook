@@ -28,8 +28,8 @@ export const ContactForm = ({ addContact }) => {
     e.preventDefault();
     addContact({
       id: nanoid(),
-      name: this.state.name,
-      number: this.state.number,
+      name,
+      number,
     });
     resetForm();
   };
