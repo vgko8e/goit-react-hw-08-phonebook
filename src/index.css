@@ -14,4 +14,14 @@ code {
     monospace;
 }
 
-
+button {
+  background: #e8e8e8;
+  border: none;
+  border-radius: 5px;
+  color: #090909;
+  cursor: pointer;
+  margin: 7px;
+  padding: 5px;
+  text-align: center;
+  transition: all .3s;
+}
