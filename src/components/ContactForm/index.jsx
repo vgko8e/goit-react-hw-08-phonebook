@@ -1,38 +1,47 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
+import { addContact, getContact } from 'redux/contactSlice';
 import styles from './ContactForm.module.css';
 
-export const ContactForm = ({ addContact }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContact);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const nameInputId = nanoid();
-  const numberInputId = nanoid();
-
   const handleInputChange = e => {
     const { name, value } = e.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return;
+    if (name === 'name') {
+      setName(value);
     }
+    if (name === 'number') {
+      setNumber(value);
+    }
+  };
+
+  const submitForm = (name, number) => {
+    const addingExistingName = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (addingExistingName) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+
+    dispatch(addContact({ name: name, number: number, id: nanoid() }));
   };
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    addContact({
-      id: nanoid(),
-      name,
-      number,
-    });
+
+    submitForm(name, number);
+
     resetForm();
   };
+
   const resetForm = () => {
     setName('');
     setNumber('');
@@ -40,9 +49,8 @@ export const ContactForm = ({ addContact }) => {
 
   return (
     <form className={styles.input_form} onSubmit={handleSubmitForm}>
-      <label htmlFor={nameInputId}>Name</label>
+      <label>Name</label>
       <input
-        id={nameInputId}
         type="text"
         name="name"
         value={name}
@@ -51,9 +59,8 @@ export const ContactForm = ({ addContact }) => {
         required
         onChange={handleInputChange}
       />
-      <label htmlFor={numberInputId}>Number</label>
+      <label>Number</label>
       <input
-        id={numberInputId}
         type="tel"
         name="number"
         value={number}
@@ -65,8 +72,4 @@ export const ContactForm = ({ addContact }) => {
       <button>Add contact</button>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
 };
