@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
-import { addContact, getContact } from 'redux/contactSlice';
+import Notiflix from 'notiflix';
+import {
+  useCreateContactMutation,
+  useGetContactsQuery,
+} from 'redux/contactsApi';
 import styles from './ContactForm.module.css';
 
 export const ContactForm = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContact);
+  const { data } = useGetContactsQuery();
+  const [addContact] = useCreateContactMutation();
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -21,28 +23,20 @@ export const ContactForm = () => {
     }
   };
 
-  const submitForm = (name, number) => {
-    const addingExistingName = contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
-
-    if (addingExistingName) {
-      alert(`${name} is already in contacts`);
-      return;
+  const handleSubmitForm = async event => {
+    event.preventDefault();
+    try {
+      data.find(contact => contact.name === name)
+        ? Notiflix.Notify.info(`${name} is already in contacts.`)
+        : (await addContact({ name, number })) &&
+          Notiflix.Notify.success(`${name} added to your phonebook`);
+    } catch (error) {
+      console.log(error);
     }
-
-    dispatch(addContact({ name: name, number: number, id: nanoid() }));
+    reset();
   };
 
-  const handleSubmitForm = e => {
-    e.preventDefault();
-
-    submitForm(name, number);
-
-    resetForm();
-  };
-
-  const resetForm = () => {
+  const reset = () => {
     setName('');
     setNumber('');
   };
