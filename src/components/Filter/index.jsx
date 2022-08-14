@@ -14,7 +14,12 @@ export const Filter = () => {
   return (
     <label className={styles.filter_label}>
       Find contacts by name:
-      <input type="text" value={filter} onChange={handleFilterChange} />
+      <input
+        className={styles.filter_input}
+        type="text"
+        value={filter}
+        onChange={handleFilterChange}
+      />
     </label>
   );
 };
