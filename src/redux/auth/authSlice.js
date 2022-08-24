@@ -11,6 +11,12 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
-    [authOperations.register.fulfilled](state, action) {},
+    [authOperations.register.fulfilled](state, action) {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.IsLoggedIn = true;
+    },
   },
 });
+
+export default authSlice.reducer;
