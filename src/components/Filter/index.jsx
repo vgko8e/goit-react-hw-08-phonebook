@@ -1,25 +1,33 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { filterContact, getFilter } from 'redux/filterSlice';
 import styles from './Filter.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { filterUser } from '../../redux/contacts/contactsOperations';
+import { filterSelector } from '../../redux/contacts/contactsSelector';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { NavLink } from 'react-router-dom';
 
-export const Filter = () => {
+const Filter = () => {
+  const filter = useSelector(filterSelector);
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
-
-  const handleFilterChange = e => {
-    dispatch(filterContact(e.target.value));
-  };
-
   return (
-    <label className={styles.filter_label}>
-      Find contacts by name:
-      <input
-        className={styles.filter_input}
-        type="text"
-        value={filter}
-        onChange={handleFilterChange}
-      />
-    </label>
+    <div>
+      <label className={styles.label}>
+        Find contact by name
+        <input
+          type="text"
+          name="name"
+          onChange={e => dispatch(filterUser(e.target.value))}
+          value={filter}
+          className="input"
+        />
+      </label>
+      <NavLink
+        to="/goit-react-hw-08-phonebook/contacts"
+        className={styles.linkup}
+      >
+        <KeyboardArrowUpIcon sx={{ fontSize: 60, color: 'blue' }} />
+      </NavLink>
+    </div>
   );
 };
+
+export { Filter };

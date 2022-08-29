@@ -1,42 +1,107 @@
-import React from 'react';
-import { getFilter } from 'redux/filterSlice';
+import { ContactItem } from 'components/ContactList/ContactItem';
 import {
-  useGetContactsQuery,
-  useDeleteContactMutation,
-} from 'redux/contactsApi';
-import styles from './ContactList.module.css';
-import { useSelector } from 'react-redux';
+  Table,
+  Typography,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableHead,
+} from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteUser, getUsers } from 'redux/contacts/contactsOperations';
+import { filterSelector, itemsSelector } from 'redux/contacts/contactsSelector';
+import { useEffect } from 'react';
+import { getIsLogin } from 'redux/auth/authSelector';
 
-export const ContactList = () => {
-  const { data, isFetching } = useGetContactsQuery();
-  const [deleteContact] = useDeleteContactMutation();
-  const filter = useSelector(getFilter);
+const ContactList = () => {
+  const items = useSelector(itemsSelector);
+  const filter = useSelector(filterSelector);
+  const dispatch = useDispatch();
 
-  const filterContacts = () => {
-    if (filter === '') {
-      return data;
-    }
-    const normalizedText = filter.toLowerCase();
-    return data.filter(({ name }) =>
-      name.toLowerCase().includes(normalizedText)
-    );
+  const isLogin = useSelector(getIsLogin);
+  const contacts = items?.filter(({ name }) =>
+    name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+  );
+  useEffect(() => {
+    isLogin && dispatch(getUsers());
+  }, [dispatch, isLogin]);
+
+  const deleteContact = id => {
+    dispatch(deleteUser(id));
   };
 
-  const filteredContacts = filterContacts();
-
-  if (isFetching) {
-    return <p>Loading...</p>;
-  }
   return (
-    <ul className={styles.contact_list}>
-      {filteredContacts.map(contact => (
-        <li key={contact.id}>
-          {contact.name} {contact.number}
-          <button type="button" onClick={() => deleteContact(contact.id)}>
-            Delete user
-          </button>
-        </li>
-      ))}
-    </ul>
+    <Table>
+      <TableHead>
+        <TableRow sx={{ backgroundColor: 'black' }}>
+          <TableCell>
+            <Typography
+              variant="h3"
+              gutterBottom
+              component="p"
+              sx={{ color: 'white' }}
+            >
+              №
+            </Typography>
+          </TableCell>
+          <TableCell>
+            <Typography
+              variant="h3"
+              gutterBottom
+              component="p"
+              sx={{ color: 'white' }}
+            >
+              Avatar
+            </Typography>
+          </TableCell>
+          <TableCell>
+            <Typography
+              variant="h3"
+              gutterBottom
+              component="p"
+              sx={{ color: 'white' }}
+            >
+              Name
+            </Typography>
+          </TableCell>
+          <TableCell>
+            <Typography
+              variant="h3"
+              gutterBottom
+              component="p"
+              sx={{ color: 'white' }}
+            >
+              Phone
+            </Typography>
+          </TableCell>
+          <TableCell>
+            <Typography
+              variant="h3"
+              gutterBottom
+              component="p"
+              sx={{ color: 'white' }}
+            >
+              Options
+            </Typography>
+          </TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {contacts.map(({ id, name, number }, index) => {
+          return (
+            <ContactItem
+              index={index}
+              key={id}
+              id={id}
+              name={name}
+              phone={number}
+              onDelete={deleteContact}
+            />
+          );
+        })}
+      </TableBody>
+    </Table>
   );
 };
+
+export { ContactList };

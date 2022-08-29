@@ -1,8 +1,17 @@
-.filter_label{
-    text-align: center;
-    color: inherit;
+.label {
+    display: block;
+    margin: 0 auto;
+    max-width: 500px;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 10px;
+    border-radius: 16px;
 }
 
-.filter_input{
-    margin-top: 7px;
+.linkup {
+    width: 60px;
+    display: block;
+    margin: 0 auto;
 }
