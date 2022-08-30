@@ -37,7 +37,7 @@ function LayOut() {
           <Toolbar
             sx={{
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: 'row',
               gap: '45px',
               marginTop: '100px',
             }}

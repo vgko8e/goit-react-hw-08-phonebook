@@ -22,6 +22,9 @@ function HomeView() {
         alt="greeting"
         width={400}
       />
+      <Typography variant="h3" component="div">
+        To use the PhoneBook, register or log in!
+      </Typography>
     </Box>
   );
 }
