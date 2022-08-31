@@ -1,4 +1,4 @@
-import { ContactItem } from 'components/ContactList/ContactItem';
+import { ContactItem } from './ContactItem/index';
 import {
   Table,
   Typography,

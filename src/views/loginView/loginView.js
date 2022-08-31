@@ -45,7 +45,7 @@ const LoginView = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             textAlign: 'center',
-            // alignItems: 'center',
+            alignItems: 'center',
           },
         }}
         noValidate
@@ -56,7 +56,7 @@ const LoginView = () => {
             fontWeight: 'bold',
             textAlign: 'center',
             fontSize: '40px',
-            marginTop: '100px',
+            marginTop: '200px',
           }}
         >
           Log In
@@ -69,7 +69,7 @@ const LoginView = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              // alignItems: 'center',
+              alignItems: 'center',
             },
           }}
         >

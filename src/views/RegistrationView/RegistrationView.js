@@ -63,7 +63,7 @@ function RegistrationView() {
           fontWeight: 'bold',
           textAlign: 'center',
           fontSize: '40px',
-          marginTop: '100px',
+          marginTop: '200px',
         }}
       >
         Sign In form
@@ -85,7 +85,7 @@ function RegistrationView() {
           value={name}
           name="name"
           onChange={handlerChange}
-          placeholder="Wasya Rogovenko"
+          placeholder="Elon Musk"
           type="text"
           id="inputName3"
         />

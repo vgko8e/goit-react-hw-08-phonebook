@@ -23,7 +23,7 @@ function HomeView() {
         width={400}
       />
       <Typography variant="h3" component="div">
-        To use the PhoneBook, register or log in!
+        To use the phone book, register or login!
       </Typography>
     </Box>
   );

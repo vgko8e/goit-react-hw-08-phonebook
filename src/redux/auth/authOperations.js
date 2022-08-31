@@ -2,20 +2,22 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-axios.default.baseUrl = 'https://connections-api.herokuapp.com/ ';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const token = {
   set(token) {
-    axios.defaults.headers.Authorization = `Bearer ${token}`;
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.Authorization = ``;
+    axios.defaults.headers.common.Authorization = '';
   },
 };
 
 export const signIn = createAsyncThunk('auth/register', async credentials => {
   try {
-    const { data } = await axios.post('users/signup', credentials);
+    const { data } = await axios.post('/users/signup', credentials);
+
+    token.set(data.token);
     toast.success('Done');
     return data;
   } catch (error) {
@@ -26,7 +28,9 @@ export const signIn = createAsyncThunk('auth/register', async credentials => {
 
 export const logIn = createAsyncThunk('auth/login', async credentials => {
   try {
-    const { data } = await axios.post('users/login', credentials);
+    const { data } = await axios.post('/users/login', credentials);
+
+    token.set(data.token);
     toast.success('LogIn success!');
     return data;
   } catch (error) {
@@ -37,7 +41,7 @@ export const logIn = createAsyncThunk('auth/login', async credentials => {
 
 export const logOut = createAsyncThunk('auth/logout', async () => {
   try {
-    await axios.post('users/logout');
+    await axios.post('/users/logout');
     token.unset();
     toast.success('LogOut success!');
   } catch (error) {

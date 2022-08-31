@@ -28,18 +28,19 @@ function LayOut() {
     <>
       <Box
         sx={{
-          flexDirection: 'row',
           display: 'flex',
+          flexDirection: 'row',
           minHeight: '100vh',
         }}
       >
-        <AppBar sx={{ width: '300px', height: '100vh', top: 0, left: 0 }}>
+        <AppBar sx={{ width: '100', top: 0, left: 0 }}>
           <Toolbar
             sx={{
               display: 'flex',
               flexDirection: 'row',
-              gap: '45px',
-              marginTop: '100px',
+              justifyContent: 'space-between',
+              marginTop: '20px',
+              marginBottom: '20px',
             }}
           >
             {isLogin && (
