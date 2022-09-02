@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { fetchCurrentUser } from 'redux/auth/authOperations';
 import { ContactsView } from 'views/ContactsView/ContactsView';
-import { LoginView } from 'views/LoginView/LoginView';
+import LoginView from 'views/LoginView/LoginView';
 import { RegistrationView } from 'views/RegistrationView/RegistrationView';
 import { LayOut } from 'components/Layout';
 import { getStatusFetch, getToken } from 'redux/auth/authSelectors';

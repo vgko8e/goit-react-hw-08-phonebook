@@ -113,4 +113,4 @@ const LoginView = () => {
   );
 };
 
-export { LoginView };
+export default LoginView;
