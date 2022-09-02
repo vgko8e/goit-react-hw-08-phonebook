@@ -1,20 +1,32 @@
-import { combineReducers } from '@reduxjs/toolkit';
-import { createReducer } from '@reduxjs/toolkit';
 import {
-  getUsers,
   addUser,
   deleteUser,
   filterUser,
+  getUsers,
 } from './contactsOperations';
+import { createReducer } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 
-const itemsContact = createReducer([], {
-  [getUsers.fulfilled]: (_, action) => action.payload,
-  [addUser.fulfilled]: (state, action) => [...state, action.payload],
-  [deleteUser.fulfilled]: (state, action) =>
-    state.filter(contact => contact.id !== action.payload),
+const itemReducer = createReducer([], {
+  [getUsers.fulfilled]: (_, { payload }) => payload,
+  [addUser.fulfilled]: (_, { payload }) => payload,
+  [deleteUser.fulfilled]: (_, { payload }) => payload,
 });
 
-const isLoading = createReducer(false, {
+const filterReducer = createReducer('', {
+  [filterUser.type]: (_, { payload }) => payload,
+});
+
+const errorReducer = createReducer('', {
+  [getUsers.rejected]: (_, { payload }) => payload,
+  [addUser.rejected]: (_, { payload }) => payload,
+  [deleteUser.rejected]: (_, { payload }) => payload,
+  [getUsers.pending]: () => '',
+  [addUser.pending]: () => '',
+  [deleteUser.pending]: () => '',
+});
+
+const loadingReducer = createReducer(false, {
   [getUsers.pending]: () => true,
   [getUsers.fulfilled]: () => false,
   [getUsers.rejected]: () => false,
@@ -26,22 +38,9 @@ const isLoading = createReducer(false, {
   [deleteUser.rejected]: () => false,
 });
 
-const error = createReducer(null, {
-  [getUsers.rejected]: (_, action) => action.payload,
-  [getUsers.fulfilled]: () => null,
-  [addUser.rejected]: (_, action) => action.payload,
-  [addUser.fulfilled]: () => null,
-  [deleteUser.rejected]: (_, action) => action.payload,
-  [deleteUser.fulfilled]: () => null,
-});
-
-const filterContact = createReducer('', {
-  [filterUser]: (_, action) => action.payload,
-});
-
-export default combineReducers({
-  itemsContact,
-  isLoading,
-  error,
-  filterContact,
+export const contactsReducer = combineReducers({
+  items: itemReducer,
+  filter: filterReducer,
+  error: errorReducer,
+  isLoading: loadingReducer,
 });

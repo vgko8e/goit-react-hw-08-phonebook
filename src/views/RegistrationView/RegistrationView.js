@@ -66,7 +66,7 @@ function RegistrationView() {
           marginTop: '200px',
         }}
       >
-        Sign In form
+        Sign in form
       </Box>
       <Box
         sx={{

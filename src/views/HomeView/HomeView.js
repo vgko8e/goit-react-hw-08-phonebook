@@ -1,31 +1,47 @@
 import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import phonebook from '../../image/phonebook.png';
 
 function HomeView() {
   return (
-    <Box
+    <Card
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         gap: '50px',
-        padding: '150px',
+        padding: '50px',
       }}
     >
-      <Typography variant="h2" component="div">
-        Welcome to PhoneBook!
-      </Typography>
-      <img
-        src="https://cdn.iconscout.com/icon/free/png-512/phone-book-1404933-1187580.png"
-        alt="greeting"
-        width={400}
-      />
-      <Typography variant="h3" component="div">
-        To use the phone book, register or login!
-      </Typography>
-    </Box>
+      <CardContent>
+        <Typography
+          variant="h2"
+          component="div"
+          textAlign="center"
+          marginBottom="20px"
+        >
+          Welcome to PhoneBook!
+        </Typography>
+        <CardMedia
+          component="img"
+          width="400"
+          image={phonebook}
+          alt="greeting"
+        />
+        <Typography
+          variant="h3"
+          component="div"
+          textAlign="center"
+          marginTop="20px"
+        >
+          To use the PhoneBook, register or log in!
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 

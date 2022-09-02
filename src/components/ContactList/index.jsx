@@ -9,16 +9,19 @@ import {
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getUsers } from 'redux/contacts/contactsOperations';
-import { filterSelector, itemsSelector } from 'redux/contacts/contactsSelector';
+import { itemsSelector, filterSelector } from 'redux/contacts/contactsSelector';
 import { useEffect } from 'react';
-import { getIsLogin } from 'redux/auth/authSelector';
+import { getIsLogin } from 'redux/auth/authSelectors';
 
 const ContactList = () => {
+  // const contacts = useSelector(itemsSelector);
+  // const dispatch = useDispatch();
+  // const isLogin = useSelector(getIsLogin);
   const items = useSelector(itemsSelector);
   const filter = useSelector(filterSelector);
   const dispatch = useDispatch();
-
   const isLogin = useSelector(getIsLogin);
+
   const contacts = items?.filter(({ name }) =>
     name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
   );
@@ -33,7 +36,7 @@ const ContactList = () => {
   return (
     <Table>
       <TableHead>
-        <TableRow sx={{ backgroundColor: 'black' }}>
+        <TableRow sx={{ backgroundColor: 'gray' }}>
           <TableCell>
             <Typography
               variant="h3"

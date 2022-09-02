@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 
 import { Outlet, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsLogin, getUserName } from 'redux/auth/authSelector';
+import { getIsLogin, getUserName } from 'redux/auth/authSelectors';
 import { logOut } from 'redux/auth/authOperations';
 import Avatar from 'react-avatar';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -28,19 +28,18 @@ function LayOut() {
     <>
       <Box
         sx={{
-          display: 'flex',
           flexDirection: 'row',
+          display: 'flex',
           minHeight: '100vh',
         }}
       >
-        <AppBar sx={{ width: '100', top: 0, left: 0 }}>
+        <AppBar sx={{ width: '300px', height: '100vh', top: 0, left: 0 }}>
           <Toolbar
             sx={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: '20px',
-              marginBottom: '20px',
+              flexDirection: 'column',
+              gap: '45px',
+              marginTop: '100px',
             }}
           >
             {isLogin && (
@@ -54,11 +53,6 @@ function LayOut() {
                 >
                   {name}
                 </Typography>
-                <img
-                  src="http://img.combats.com/i/smile/horse.gif"
-                  alt="s"
-                  width={80}
-                />
 
                 <Button color="inherit" onClick={handlerLogout}>
                   <LogoutIcon sx={{ fontSize: 40, color: 'white' }} />

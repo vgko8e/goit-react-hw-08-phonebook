@@ -1,13 +1,18 @@
 import styles from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterUser } from '../../redux/contacts/contactsOperations';
-import { filterSelector } from '../../redux/contacts/contactsSelector';
+import { filterUser } from 'redux/contacts/contactsOperations';
+import { filterSelector } from 'redux/contacts/contactsSelector';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { NavLink } from 'react-router-dom';
 
 const Filter = () => {
   const filter = useSelector(filterSelector);
   const dispatch = useDispatch();
+
+  const changeFilter = e => {
+    dispatch(filterUser(e.currentTarget.value));
+  };
+
   return (
     <div>
       <label className={styles.label}>
@@ -15,7 +20,7 @@ const Filter = () => {
         <input
           type="text"
           name="name"
-          onChange={e => dispatch(filterUser(e.target.value))}
+          onChange={changeFilter}
           value={filter}
           className="input"
         />

@@ -6,7 +6,7 @@ import { ContactsView } from 'views/ContactsView/ContactsView';
 import { LoginView } from 'views/LoginView/LoginView';
 import { RegistrationView } from 'views/RegistrationView/RegistrationView';
 import { LayOut } from 'components/Layout';
-import { getStatusFetch, getToken } from 'redux/auth/authSelector';
+import { getStatusFetch, getToken } from 'redux/auth/authSelectors';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { Box } from '@mui/material';
