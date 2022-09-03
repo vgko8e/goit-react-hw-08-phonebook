@@ -25,66 +25,59 @@ function LayOut() {
     dispatch(logOut());
   };
   return (
-    <>
-      <Box
-        sx={{
-          flexDirection: 'row',
-          display: 'flex',
-          minHeight: '100vh',
-        }}
-      >
-        <AppBar sx={{ width: '300px', height: '100vh', top: 0, left: 0 }}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '45px',
-              marginTop: '100px',
-            }}
-          >
-            {isLoggedIn && (
-              <>
-                <Avatar name={name} size={80} round={true}></Avatar>
-                <Typography
-                  variant="h4"
-                  gutterBottom
-                  component="p"
-                  sx={{ m: 2 }}
-                >
-                  {name}
-                </Typography>
+    <Box
+      sx={{
+        flexDirection: 'row',
+        display: 'flex',
+        minHeight: '100vh',
+      }}
+    >
+      <AppBar sx={{ width: '300px', height: '100vh', top: 0, left: 0 }}>
+        <Toolbar
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '45px',
+            marginTop: '100px',
+          }}
+        >
+          {isLoggedIn && (
+            <>
+              <Avatar name={name} size={80} round={true}></Avatar>
+              <Typography variant="h4" gutterBottom component="p" sx={{ m: 2 }}>
+                {name}
+              </Typography>
 
-                <Button color="inherit" onClick={handlerLogout}>
-                  <LogoutIcon sx={{ fontSize: 40, color: 'white' }} />
-                </Button>
-                <NavLink to={'contacts'}>
-                  <ImportContactsRoundedIcon
-                    sx={{ fontSize: 40, color: 'white' }}
-                  />
-                </NavLink>
-              </>
-            )}
-            <NavLink to={'/'}>
-              <HomeRoundedIcon sx={{ fontSize: 40, color: 'white' }} />
-            </NavLink>
+              <Button color="inherit" onClick={handlerLogout}>
+                <LogoutIcon sx={{ fontSize: 40, color: 'white' }} />
+              </Button>
+              <NavLink to={'contacts'}>
+                <ImportContactsRoundedIcon
+                  sx={{ fontSize: 40, color: 'white' }}
+                />
+              </NavLink>
+            </>
+          )}
+          <NavLink to={'/'}>
+            <HomeRoundedIcon sx={{ fontSize: 40, color: 'white' }} />
+          </NavLink>
 
-            {!isLoggedIn && (
-              <>
-                <NavLink to={'/register'}>
-                  <AppRegistrationIcon sx={{ fontSize: 40, color: 'white' }} />
-                </NavLink>
-                <NavLink to={'/login'}>
-                  <LoginIcon sx={{ fontSize: 40, color: 'white' }} />
-                </NavLink>
-              </>
-            )}
-          </Toolbar>
-        </AppBar>
-        <Box sx={{ flexGrow: 1 }}>
-          <Outlet />
-        </Box>
+          {!isLoggedIn && (
+            <>
+              <NavLink to={'/register'}>
+                <AppRegistrationIcon sx={{ fontSize: 40, color: 'white' }} />
+              </NavLink>
+              <NavLink to={'/login'}>
+                <LoginIcon sx={{ fontSize: 40, color: 'white' }} />
+              </NavLink>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+      <Box sx={{ flexGrow: 1 }}>
+        <Outlet />
       </Box>
-    </>
+    </Box>
   );
 }
 
