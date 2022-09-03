@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 
 import { Outlet, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsLogin, getUserName } from 'redux/auth/authSelectors';
+import { getIsLoggedIn, getUserName } from 'redux/auth/authSelectors';
 import { logOut } from 'redux/auth/authOperations';
 import Avatar from 'react-avatar';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -17,7 +17,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 function LayOut() {
-  const isLogin = useSelector(getIsLogin);
+  const isLoggedIn = useSelector(getIsLoggedIn);
   const name = useSelector(getUserName);
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ function LayOut() {
               marginTop: '100px',
             }}
           >
-            {isLogin && (
+            {isLoggedIn && (
               <>
                 <Avatar name={name} size={80} round={true}></Avatar>
                 <Typography
@@ -57,23 +57,23 @@ function LayOut() {
                 <Button color="inherit" onClick={handlerLogout}>
                   <LogoutIcon sx={{ fontSize: 40, color: 'white' }} />
                 </Button>
-                <NavLink to={'/goit-react-hw-08-phonebook/contacts'}>
+                <NavLink to={'contacts'}>
                   <ImportContactsRoundedIcon
                     sx={{ fontSize: 40, color: 'white' }}
                   />
                 </NavLink>
               </>
             )}
-            <NavLink to={'/goit-react-hw-08-phonebook/'}>
+            <NavLink to={'/'}>
               <HomeRoundedIcon sx={{ fontSize: 40, color: 'white' }} />
             </NavLink>
 
-            {!isLogin && (
+            {!isLoggedIn && (
               <>
-                <NavLink to={'/goit-react-hw-08-phonebook/register'}>
+                <NavLink to={'/register'}>
                   <AppRegistrationIcon sx={{ fontSize: 40, color: 'white' }} />
                 </NavLink>
-                <NavLink to={'/goit-react-hw-08-phonebook/login'}>
+                <NavLink to={'/login'}>
                   <LoginIcon sx={{ fontSize: 40, color: 'white' }} />
                 </NavLink>
               </>

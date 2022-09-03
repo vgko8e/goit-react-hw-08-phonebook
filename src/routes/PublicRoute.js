@@ -5,9 +5,5 @@ import { getToken } from 'redux/auth/authSelectors';
 
 export default function PublicRoute({ children }) {
   const accountToken = useSelector(getToken);
-  return !accountToken ? (
-    children
-  ) : (
-    <Navigate to="/goit-react-hw-08-phonebook/contacts"></Navigate>
-  );
+  return !accountToken ? children : <Navigate to="/contacts"></Navigate>;
 }

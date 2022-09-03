@@ -11,23 +11,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getUsers } from 'redux/contacts/contactsOperations';
 import { itemsSelector, filterSelector } from 'redux/contacts/contactsSelector';
 import { useEffect } from 'react';
-import { getIsLogin } from 'redux/auth/authSelectors';
+import { getIsLoggedIn } from 'redux/auth/authSelectors';
 
 const ContactList = () => {
-  // const contacts = useSelector(itemsSelector);
-  // const dispatch = useDispatch();
-  // const isLogin = useSelector(getIsLogin);
   const items = useSelector(itemsSelector);
   const filter = useSelector(filterSelector);
   const dispatch = useDispatch();
-  const isLogin = useSelector(getIsLogin);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   const contacts = items?.filter(({ name }) =>
     name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
   );
   useEffect(() => {
-    isLogin && dispatch(getUsers());
-  }, [dispatch, isLogin]);
+    isLoggedIn && dispatch(getUsers());
+  }, [dispatch, isLoggedIn]);
 
   const deleteContact = id => {
     dispatch(deleteUser(id));

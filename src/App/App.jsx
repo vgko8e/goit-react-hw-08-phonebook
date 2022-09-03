@@ -58,7 +58,7 @@ const App = () => {
           }}
         >
           <Routes>
-            <Route path="/goit-react-hw-08-phonebook/" element={<LayOut />}>
+            <Route path="/" element={<LayOut />}>
               <Route index element={<HomeView />} />
               <Route
                 path="register"

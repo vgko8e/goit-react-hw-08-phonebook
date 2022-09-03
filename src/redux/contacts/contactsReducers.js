@@ -1,9 +1,4 @@
-import {
-  addUser,
-  deleteUser,
-  filterUser,
-  getUsers,
-} from './contactsOperations';
+import { addUser, deleteUser, setFilter, getUsers } from './contactsOperations';
 import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 
@@ -14,7 +9,7 @@ const itemReducer = createReducer([], {
 });
 
 const filterReducer = createReducer('', {
-  [filterUser.type]: (_, { payload }) => payload,
+  [setFilter.type]: (_, { payload }) => payload,
 });
 
 const errorReducer = createReducer('', {

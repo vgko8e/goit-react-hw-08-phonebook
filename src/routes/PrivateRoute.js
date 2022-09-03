@@ -1,13 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { getToken } from 'redux/auth/authSelectors';
+import { getIsLoggedIn } from 'redux/auth/authSelectors';
 
 export default function PrivateRoute({ children }) {
-  const accountToken = useSelector(getToken);
-  return accountToken ? (
-    children
-  ) : (
-    <Navigate to="/goit-react-hw-08-phonebook/login"></Navigate>
-  );
+  const accountToken = useSelector(getIsLoggedIn);
+  return accountToken ? children : <Navigate to="/login"></Navigate>;
 }

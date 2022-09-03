@@ -38,4 +38,4 @@ export const deleteUser = createAsyncThunk('contacts/delete', async id => {
   }
 });
 
-export const filterUser = createAction('contacts/filter');
+export const setFilter = createAction('contacts/filter');

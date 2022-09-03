@@ -10,12 +10,12 @@ const ContactsView = () => {
     <div style={{ marginLeft: '300px' }}>
       <ul style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
         <li>
-          <NavLink to="/goit-react-hw-08-phonebook/contacts/add">
+          <NavLink to="/contacts/add">
             <AddCircleIcon sx={{ fontSize: 75, color: 'blue' }} />
           </NavLink>
         </li>
         <li>
-          <NavLink to="/goit-react-hw-08-phonebook/contacts/search">
+          <NavLink to="/contacts/search">
             <SearchIcon sx={{ fontSize: 75, color: 'blue' }} />
           </NavLink>
         </li>

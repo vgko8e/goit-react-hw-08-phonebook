@@ -1,6 +1,6 @@
 import styles from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterUser } from 'redux/contacts/contactsOperations';
+import { setFilter } from 'redux/contacts/contactsOperations';
 import { filterSelector } from 'redux/contacts/contactsSelector';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { NavLink } from 'react-router-dom';
@@ -10,7 +10,7 @@ const Filter = () => {
   const dispatch = useDispatch();
 
   const changeFilter = e => {
-    dispatch(filterUser(e.currentTarget.value));
+    dispatch(setFilter(e.currentTarget.value));
   };
 
   return (
@@ -25,10 +25,7 @@ const Filter = () => {
           className="input"
         />
       </label>
-      <NavLink
-        to="/goit-react-hw-08-phonebook/contacts"
-        className={styles.linkup}
-      >
+      <NavLink to="/contacts" className={styles.linkup}>
         <KeyboardArrowUpIcon sx={{ fontSize: 60, color: 'blue' }} />
       </NavLink>
     </div>
