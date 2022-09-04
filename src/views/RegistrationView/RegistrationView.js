@@ -19,7 +19,6 @@ function RegistrationView() {
       email,
       password,
     };
-    console.log(credentials);
     dispatch(signIn(credentials));
   };
 
